@@ -2,8 +2,6 @@ import { Dumbbell, Heart } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const whatsappColor = "#25D366";
-  const instagramColor = "#E4405F";
 
   return (
     <footer className="bg-brand-dark border-t border-white/10">
@@ -86,7 +84,16 @@ export default function Footer() {
             © {currentYear} Dário Lopes Personal. Todos os direitos reservados.
           </p>
           <p className="text-gray-500 text-sm flex items-center gap-1">
-            Feito com <Heart className="w-4 h-4 text-brand-red fill-brand-red" /> para resultados de elite
+            Feito com <Heart className="w-4 h-4 text-brand-red fill-brand-red" />{' '}
+            por{' '}
+            <a
+              href="https://portfolio-oficial-seven.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-red hover:text-brand-orange transition-colors"
+            >
+              José Silva
+            </a>
           </p>
         </div>
       </div>
