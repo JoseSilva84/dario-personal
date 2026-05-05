@@ -122,8 +122,8 @@ export default function Agendamento() {
                           : 'bg-brand-black/50 border-white/10 text-gray-400 hover:border-brand-red/50'
                       }`}
                     >
-                      <div className="font-semibold">{tipo.nome}</div>
-                      <div className="text-xs opacity-70">{tipo.duracao}</div>
+                      <div className="font-semibold cursor-pointer">{tipo.nome}</div>
+                      <div className="text-xs opacity-70 cursor-pointer">{tipo.duracao}</div>
                     </button>
                   ))}
                 </div>
@@ -138,7 +138,7 @@ export default function Agendamento() {
                     value={formData.data}
                     onChange={(e) => setFormData({...formData, data: e.target.value})}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full bg-brand-black/50 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:border-brand-red focus:outline-none"
+                    className="w-full bg-brand-black/50 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:border-brand-red focus:outline-none [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                     required
                   />
                 </div>
@@ -151,7 +151,7 @@ export default function Agendamento() {
                   <select
                     value={formData.horario}
                     onChange={(e) => setFormData({...formData, horario: e.target.value})}
-                    className="w-full bg-brand-black/50 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:border-brand-red focus:outline-none appearance-none"
+                    className="w-full bg-brand-black/50 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-white focus:border-brand-red focus:outline-none appearance-none cursor-pointer"
                     required
                   >
                     <option value="">Selecione um horário</option>
@@ -165,7 +165,7 @@ export default function Agendamento() {
               <div className="md:col-span-2">
                 <button
                   type="submit"
-                  className="w-full bg-gradient-red text-white py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow"
+                  className="w-full bg-gradient-red text-white py-4 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow cursor-pointer"
                 >
                   Agendar Consulta
                 </button>
