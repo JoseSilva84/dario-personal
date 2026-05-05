@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="insta-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F58529"/>
+      <stop offset="50%" stop-color="#DD2A7B"/>
+      <stop offset="100%" stop-color="#8134AF"/>
+    </linearGradient>
+  </defs>
+  <!-- Fundo arredondado com gradiente Instagram -->
+  <rect width="32" height="32" rx="7" fill="url(#insta-gradient)"/>
+  <!-- Borda interna -->
+  <rect x="1.5" y="1.5" width="29" height="29" rx="5.5" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"/>
+  <!-- Lente da câmera central -->
+  <circle cx="16" cy="16" r="8.5" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- Círculo interno da lente -->
+  <circle cx="16" cy="16" r="5.5" fill="none" stroke="white" stroke-width="1.5"/>
+  <!-- Ponto no centro -->
+  <circle cx="16" cy="16" r="2" fill="white"/>
+  <!-- Brilho no canto superior -->
+  <circle cx="9" cy="9" r="1.5" fill="white" opacity="0.8"/>
+</svg>
