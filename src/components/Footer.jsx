@@ -92,7 +92,7 @@ export default function Footer() {
               rel="noopener noreferrer"
               className="text-brand-red hover:text-brand-orange transition-colors"
             >
-              José Silva
+              José Silva - Portfolio 
             </a>
           </p>
         </div>
