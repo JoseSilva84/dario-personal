@@ -94,7 +94,10 @@ export default function Hero() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slide.image})` }}
+            style={{ 
+              backgroundImage: `url(${slide.image})`,
+              backgroundPosition: slide.id === 1 ? 'center 40%' : undefined
+            }}
           >
             <div className="absolute inset-0 hero-gradient" />
             <div className="absolute inset-0 bg-gradient-to-r from-brand-black/95 via-brand-black/70 to-brand-black/10" />

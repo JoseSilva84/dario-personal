@@ -10,7 +10,7 @@ const stats = [
 
 export default function Sobre() {
   return (
-    <section id="sobre" className="py-24 bg-brand-black relative overflow-hidden">
+    <section id="sobre" className="py-16 bg-brand-black relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

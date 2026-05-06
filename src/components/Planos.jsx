@@ -54,7 +54,7 @@ const planos = [
 
 export default function Planos() {
   return (
-    <section id="planos" className="py-24 bg-gradient-dark relative">
+    <section id="planos" className="py-16 bg-gradient-dark relative">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

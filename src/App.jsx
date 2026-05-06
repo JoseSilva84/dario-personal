@@ -2,8 +2,9 @@ import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Sobre from './components/Sobre'
 import Planos from './components/Planos'
-import Contato from './components/Contato'
+import Depoimentos from './components/Depoimentos'
 import Agendamento from './components/Agendamento'
+import Contato from './components/Contato'
 import Blog from './components/Blog'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
@@ -25,6 +26,7 @@ function App() {
       <Hero />
       <Sobre />
       <Planos />
+      <Depoimentos />
       <Agendamento />
       <Blog />
       <Contato />

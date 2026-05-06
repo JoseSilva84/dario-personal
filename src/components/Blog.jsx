@@ -1,5 +1,6 @@
-import { motion } from 'framer-motion';
-import { Calendar, User, ArrowRight, Tag } from 'lucide-react';
+import { useState, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Calendar, User, ArrowRight, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const posts = [
   {
@@ -29,9 +30,55 @@ const posts = [
     resumo: 'Entenda como organizar seus treinos ao longo das semanas para evitar plateaus.',
     imagem: '/images/blog3.svg',
   },
+  {
+    id: 4,
+    titulo: 'Suplementação: O Que Realmente Funciona',
+    data: '2024-01-20',
+    autor: 'Dário Lopes',
+    categoria: 'Nutrição',
+    resumo: 'Análise dos principais suplementos do mercado e sua eficácia comprovada.',
+    imagem: '/images/blog4.svg',
+  },
+  {
+    id: 5,
+    titulo: 'Treino para Iniciantes: Guia Completo',
+    data: '2024-01-25',
+    autor: 'Dário Lopes',
+    categoria: 'Treino',
+    resumo: 'Tudo que você precisa saber para começar sua jornada no mundo do fitness.',
+    imagem: '/images/blog5.svg',
+  },
 ];
 
 export default function Blog() {
+  const [current, setCurrent] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const prev = useCallback(() => {
+    setDirection(-1);
+    setCurrent((prev) => (prev === 0 ? posts.length - 1 : prev - 1));
+  }, []);
+
+  const next = useCallback(() => {
+    setDirection(1);
+    setCurrent((prev) => (prev === posts.length - 1 ? 0 : prev + 1));
+  }, []);
+
+  const variants = {
+    enter: (direction) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (direction) => ({
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0,
+    }),
+  };
+
   return (
     <section id="blog" className="py-24 bg-gradient-dark relative overflow-hidden">
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-3xl" />
@@ -55,51 +102,99 @@ export default function Blog() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {posts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 * index, duration: 0.6 }}
-              className="bg-brand-dark/80 border border-white/10 rounded-3xl overflow-hidden card-glow group hover:transform hover:scale-[1.02] transition-all"
+        <div className="relative">
+          <AnimatePresence initial={false} custom={direction}>
+            <motion.div
+              key={current}
+              custom={direction}
+              variants={variants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              transition={{
+                x: { type: 'spring', stiffness: 300, damping: 30 },
+                opacity: { duration: 0.4 },
+              }}
+              className="grid md:grid-cols-3 gap-8"
             >
-              <div className="h-48 bg-gradient-to-br from-brand-red/20 to-brand-black/50 relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Tag className="w-16 h-16 text-brand-red/30" />
-                </div>
-              </div>
-              
-              <div className="p-6">
-                <div className="flex items-center gap-4 text-gray-400 text-sm mb-3">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="w-4 h-4" />
-                    <span>{new Date(post.data).toLocaleDateString('pt-BR')}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <User className="w-4 h-4" />
-                    <span>{post.autor}</span>
-                  </div>
-                </div>
-                
-                <span className="inline-block text-brand-red text-xs font-semibold uppercase tracking-wider mb-2">
-                  {post.categoria}
-                </span>
-                
-                <h3 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
-                  {post.titulo}
-                </h3>
-                
-                <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                  {post.resumo}
-                </p>
-                
-                <a href="#" className="inline-flex items-center gap-2 text-brand-red font-semibold text-sm hover:gap-3 transition-all">
-                  Ler mais <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </motion.article>
+              {[0, 1, 2].map((offset) => {
+                const index = (current + offset) % posts.length;
+                const post = posts[index];
+                return (
+                  <motion.article
+                    key={post.id}
+                    initial={{ opacity: 0, y: 40 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: offset * 0.1, duration: 0.6 }}
+                    className="bg-brand-dark/80 border border-white/10 rounded-3xl overflow-hidden card-glow group hover:transform hover:scale-[1.02] transition-all"
+                  >
+                    <div className="h-48 bg-gradient-to-br from-brand-red/20 to-brand-black/50 relative">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <Tag className="w-16 h-16 text-brand-red/30" />
+                      </div>
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="flex items-center gap-4 text-gray-400 text-sm mb-3">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          <span>{new Date(post.data).toLocaleDateString('pt-BR')}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <User className="w-4 h-4" />
+                          <span>{post.autor}</span>
+                        </div>
+                      </div>
+                      
+                      <span className="inline-block text-brand-red text-xs font-semibold uppercase tracking-wider mb-2">
+                        {post.categoria}
+                      </span>
+                      
+                      <h3 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
+                        {post.titulo}
+                      </h3>
+                      
+                      <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                        {post.resumo}
+                      </p>
+                      
+                      <a href="#" className="inline-flex items-center gap-2 text-brand-red font-semibold text-sm hover:gap-3 transition-all">
+                        Ler mais <ArrowRight className="w-4 h-4" />
+                      </a>
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </motion.div>
+          </AnimatePresence>
+
+          <button
+            onClick={prev}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors cursor-pointer"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            onClick={next}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors cursor-pointer"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-8">
+          {posts.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setDirection(index > current ? 1 : index < current ? -1 : 0);
+                setCurrent(index);
+              }}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === current ? 'bg-brand-red w-8' : 'bg-white/40 hover:bg-white/60'
+              }`}
+            />
           ))}
         </div>
 
