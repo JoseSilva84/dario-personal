@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, User, CheckCircle } from 'lucide-react';
 
 const horariosDisponiveis = [
-  '08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00', '18:00'
+  '08:00', '09:00', '10:00', '11:00', '14:00', '15:00', '16:00', '17:00', 'Horário a combinar'
 ];
 
 const tiposServico = [
@@ -12,6 +12,9 @@ const tiposServico = [
   { id: 3, nome: 'Consultoria Online', duracao: '40 min' },
   { id: 4, nome: 'Mentoria Online', duracao: '30 min' },
 ];
+
+//Segunda à sexta (segunda opção: data a definir), de 08h00 às 11h00 
+
 
 export default function Agendamento() {
   const [formData, setFormData] = useState({

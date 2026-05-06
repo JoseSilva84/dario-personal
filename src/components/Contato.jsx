@@ -5,7 +5,7 @@ export default function Contato() {
   return (
     <section id="contato" className="py-24 bg-brand-black relative overflow-hidden">
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-orange/5 rounded-full blur-3xl" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -35,16 +35,9 @@ export default function Contato() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Telefone / WhatsApp</p>
-                  <p className="text-white font-semibold">(88) 92165-7051</p>
+                  <p className="text-white font-semibold">(88) 992165-7051</p>
                 </div>
               </div>
-
-              {/* <div className="flex items-center gap-4 p-4 bg-brand-dark/80 rounded-xl border border-white/10">
-                <div>
-                  <p className="text-gray-400 text-sm">Instagram</p>
-                  <p className="text-white font-semibold">@dariolopes_personal</p>
-                </div>
-              </div> */}
 
               <div className="flex items-center gap-4 p-4 bg-brand-dark/80 rounded-xl border border-white/10">
                 <div className="w-12 h-12 rounded-full bg-brand-gold/20 flex items-center justify-center">
@@ -52,7 +45,7 @@ export default function Contato() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Atendimento</p>
-                  <p className="text-white font-semibold">Seg - Sáb: 6h às 22h</p>
+                  <p className="text-white font-semibold">Seg - Sex: 8h às 17h</p>
                 </div>
               </div>
             </div>
@@ -80,7 +73,7 @@ export default function Contato() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3 text-gray-300">
                   <Check className="w-5 h-5 text-brand-red flex-shrink-0" />
-                  <span>Avaliação física gratuita na primeira consulta</span>
+                  <span>Amenese Gratuita e Avaliação Visual (Opcional)</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-300">
                   <Check className="w-5 h-5 text-brand-red flex-shrink-0" />
@@ -104,7 +97,7 @@ export default function Contato() {
               <p className="text-center text-gray-500 text-sm mt-4">
                 Ou ligue diretamente:{' '}
                 <a href="tel:+5588921657051" className="text-brand-red hover:underline">
-                  (88) 92165-7051
+                  (88) 992165-7051
                 </a>
               </p>
             </div>
