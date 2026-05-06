@@ -7,8 +7,8 @@ export default function Footer() {
     <footer className="bg-brand-dark border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid md:grid-cols-3 gap-12">
-          <div>
-            <div className="flex items-center gap-2 mb-6">
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start gap-2 mb-6">
               <Dumbbell className="w-8 h-8 text-brand-red" />
               <div className="flex flex-col">
                 <span className="font-heading text-xl font-bold tracking-wider text-white">
@@ -25,11 +25,11 @@ export default function Footer() {
             </p>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="font-heading text-lg font-bold text-white mb-6">
               LINKS RÁPIDOS
             </h4>
-            <ul className="space-y-3">
+            <ul className="space-y-3 flex flex-col items-center md:items-start">
               {[
                 { href: '#inicio', label: 'Início' },
                 { href: '#sobre', label: 'Sobre' },
@@ -48,17 +48,17 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
+          <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <h4 className="font-heading text-lg font-bold text-white mb-6">
               CONTATO
             </h4>
-            <ul className="space-y-4">
+            <ul className="space-y-4 flex flex-col items-center md:items-start">
               <li>
                 <a
                   href="https://wa.me/5588921657051"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-[#25D366] transition-colors"
+                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 hover:text-[#25D366] transition-colors"
                 >
                   <img src="/icons/whatsapp.svg" alt="WhatsApp" className="w-5 h-5" />
                   (88) 92165-7051
@@ -69,7 +69,7 @@ export default function Footer() {
                   href="https://instagram.com/dariolopes_personal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-gray-400 hover:text-[#E4405F] transition-colors"
+                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 hover:text-[#E4405F] transition-colors"
                 >
                   <img src="/icons/instagram.svg" alt="Instagram" className="w-5 h-5" />
                   @dariolopes_personal

@@ -21,12 +21,12 @@ export default function Sobre() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="text-brand-red font-semibold tracking-widest text-sm uppercase mb-4 block">
+            <span className="text-brand-red font-semibold tracking-[0.3em] text-xs uppercase mb-4 block">
               Sobre Mim
             </span>
-            <h2 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+            <h2 className="font-heading text-4xl sm:text-5xl font-light text-white mb-6 leading-tight tracking-wide uppercase">
               RESULTADOS DE{' '}
-              <span className="text-gradient">ELITE</span>
+              <span className="text-gradient font-medium">ELITE</span>
             </h2>
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
               <p>
@@ -72,7 +72,7 @@ export default function Sobre() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 * index }}
-                  className="bg-brand-dark/80 border border-brand-red/10 rounded-2xl p-6 text-center card-glow"
+                  className="glass-card rounded-2xl p-6 text-center"
                 >
                   <Icon className="w-8 h-8 text-brand-red mx-auto mb-3" />
                   <p className="font-heading text-3xl font-bold text-gradient mb-1">

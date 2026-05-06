@@ -64,12 +64,12 @@ export default function Planos() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-brand-red font-semibold tracking-widest text-sm uppercase mb-4 block">
+          <span className="text-brand-red font-semibold tracking-[0.3em] text-xs uppercase mb-4 block">
             Escolha Seu Plano
           </span>
-          <h2 className="font-heading text-4xl sm:text-5xl font-bold text-white mb-6">
+          <h2 className="font-heading text-4xl sm:text-5xl font-light text-white mb-6 tracking-wide uppercase">
             CONHEÇA MEUS{' '}
-            <span className="text-gradient">PLANOS</span>
+            <span className="text-gradient font-medium">PLANOS</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
             Planos flexíveis para todos os níveis. Comece sua transformação hoje mesmo.
@@ -86,11 +86,11 @@ export default function Planos() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 * index, duration: 0.6 }}
-                className={`relative rounded-3xl p-8 ${
+                className={`relative rounded-3xl p-8 glass-card ${
                   plano.destaque
-                    ? 'bg-gradient-to-b from-brand-red/20 to-brand-dark border-2 border-brand-red scale-105 z-10'
-                    : 'bg-brand-dark/80 border border-white/10'
-                } card-glow`}
+                    ? 'bg-gradient-to-b from-brand-red/10 to-transparent border-brand-red/30 scale-105 z-10 shadow-[0_0_30px_rgba(217,4,41,0.2)]'
+                    : ''
+                }`}
               >
                 {plano.destaque && (
                   <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-red text-white px-4 py-1 rounded-full text-sm font-bold uppercase tracking-wider">
@@ -129,10 +129,10 @@ export default function Planos() {
                   href="https://wa.me/5588921657051"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`w-full py-4 rounded-xl font-bold text-center flex items-center justify-center gap-2 transition-all ${
+                  className={`w-full py-4 rounded-xl font-medium tracking-widest text-xs uppercase text-center flex items-center justify-center gap-2 transition-all duration-300 ${
                     plano.destaque
-                      ? 'bg-gradient-red text-white hover:opacity-90 animate-pulse-glow'
-                      : 'bg-white/10 text-white hover:bg-white/20 border border-white/20'
+                      ? 'btn-premium bg-gradient-red text-white shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)]'
+                      : 'glass-card text-white hover:bg-white/10'
                   }`}
                 >
                   SAIBA MAIS

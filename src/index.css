@@ -2,9 +2,9 @@
 
 @theme {
   --color-brand-black: #0a0a0a;
-  --color-brand-red: #e63946;
-  --color-brand-orange: #f4a261;
-  --color-brand-gold: #e9c46a;
+  --color-brand-red: #d90429;
+  --color-brand-orange: #ef233c;
+  --color-brand-gold: #8d99ae;
   --color-brand-dark: #1a1a1a;
   
   --font-heading: 'Oswald', sans-serif;
@@ -71,7 +71,7 @@ body {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #f4a261 0%, #e9c46a 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -82,17 +82,43 @@ body {
 }
 
 .bg-gradient-red {
-  background: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+  background: linear-gradient(135deg, #d90429 0%, #8b0000 100%);
 }
 
-.card-glow {
-  box-shadow: 0 0 30px rgba(230, 57, 70, 0.15);
-  border: 1px solid rgba(230, 57, 70, 0.2);
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 
-.card-glow:hover {
-  box-shadow: 0 0 40px rgba(230, 57, 70, 0.3);
-  border: 1px solid rgba(230, 57, 70, 0.4);
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px rgba(217, 4, 41, 0.15);
+}
+
+.btn-premium {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-premium::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: all 0.5s ease;
+}
+
+.btn-premium:hover::before {
+  left: 100%;
 }
 
 .hero-gradient {

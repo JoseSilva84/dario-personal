@@ -97,7 +97,7 @@ export default function Hero() {
             style={{ backgroundImage: `url(${slide.image})` }}
           >
             <div className="absolute inset-0 hero-gradient" />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-black/90 via-brand-black/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-black/95 via-brand-black/70 to-brand-black/10" />
           </div>
 
           <div className="relative h-full flex items-center">
@@ -110,23 +110,23 @@ export default function Hero() {
               >
                 <div className="flex items-center gap-2 mb-4">
                   <Icon className="w-5 h-5 text-brand-red" />
-                  <span className="text-brand-red font-semibold tracking-widest text-sm uppercase">
+                  <span className="text-brand-red font-semibold tracking-[0.3em] text-xs uppercase">
                     Dário Lopes Personal
                   </span>
                 </div>
-                <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+                <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-medium tracking-wide uppercase text-white mb-4 leading-tight">
                   {slide.title}
                 </h1>
-                <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient mb-6">
+                <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-light tracking-widest uppercase text-gradient mb-6">
                   {slide.subtitle}
                 </h2>
-                <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-lg">
+                <p className="text-lg sm:text-xl text-gray-300 mb-8 max-w-lg font-light leading-relaxed">
                   {slide.description}
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a
                     href="#planos"
-                    className="bg-gradient-red text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow inline-flex items-center gap-2"
+                    className="btn-premium bg-gradient-red text-white px-8 py-4 rounded-full font-medium text-sm tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)] inline-flex items-center gap-2"
                   >
                     <Zap className="w-5 h-5" />
                     Conheça os Planos
@@ -135,7 +135,7 @@ export default function Hero() {
                     href="https://wa.me/5588921657051"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="border-2 border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-colors inline-flex items-center gap-2"
+                    className="glass-card text-white px-8 py-4 rounded-full font-medium text-sm tracking-widest uppercase hover:bg-white/10 hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
                   >
                     Fale Comigo
                   </a>
