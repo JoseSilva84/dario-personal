@@ -16,7 +16,7 @@ const slides = [
     title: 'PLANO TOP',
     subtitle: 'R$ 69,90',
     description: 'Planilha de treino demonstrativa + Acesso pelo app MFit Personal',
-    image: '/images/plano1.svg',
+    image: '/images/img2.png',
     icon: Zap,
   },
   {
@@ -24,7 +24,7 @@ const slides = [
     title: 'PLANO MASTER',
     subtitle: 'R$ 99,90',
     description: 'Planilha demonstrativa + 3 avaliações físicas + Acompanhamento',
-    image: '/images/plano2.svg',
+    image: '/images/img3.png',
     icon: Trophy,
   },
   {
@@ -32,7 +32,7 @@ const slides = [
     title: 'PLANO MASTER AVANÇADO',
     subtitle: 'R$ 199,90',
     description: 'Treino personalizado + 3 avaliações trimestral + Acompanhamento',
-    image: '/images/plano3.svg',
+    image: '/images/img4.png',
     icon: Flame,
   },
 ];
