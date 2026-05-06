@@ -8,7 +8,7 @@ const slides = [
     title: 'CONSULTORIA ONLINE',
     subtitle: 'COMECE SUA MUDANÇA HOJE!',
     description: 'Profissional de educação física para resultados de elite.',
-    image: '/images/consultoria.svg',
+    image: '/images/dario1.png',
     icon: Flame,
   },
   {
@@ -165,13 +165,13 @@ export default function Hero() {
 
       <button
         onClick={() => paginate(-1)}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors cursor-pointer"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={() => paginate(1)}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-colors cursor-pointer"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
