@@ -45,34 +45,60 @@ const depoimentos = [
   },
 ];
 
+function TestimonialCard({ depoimento }) {
+  return (
+    <div className="glass-card rounded-3xl p-8 relative overflow-hidden">
+      <Quote className="w-10 h-10 text-brand-red/20 absolute -top-2 -right-2" />
+      
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-red/30">
+          <img
+            src={depoimento.foto}
+            alt={depoimento.nome}
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div>
+          <h4 className="font-heading text-lg font-bold text-white">
+            {depoimento.nome}
+          </h4>
+          <p className="text-brand-red text-sm font-medium">
+            {depoimento.resultado}
+          </p>
+        </div>
+      </div>
+
+      <p className="text-gray-300 text-base leading-relaxed mb-6">
+        "{depoimento.texto}"
+      </p>
+
+      {depoimento.videoUrl && (
+        <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800">
+          <button className="absolute inset-0 flex items-center justify-center bg-black/50 hover:bg-black/30 transition-colors">
+            <Play className="w-12 h-12 text-white" />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function Depoimentos() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
 
   const prev = useCallback(() => {
-    setDirection(-1);
     setCurrent((prev) => (prev === 0 ? depoimentos.length - 1 : prev - 1));
   }, []);
 
   const next = useCallback(() => {
-    setDirection(1);
     setCurrent((prev) => (prev === depoimentos.length - 1 ? 0 : prev + 1));
   }, []);
 
-  const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction) => ({
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-  };
+  const visibleTestimonials = [
+    depoimentos[current],
+    depoimentos[(current + 1) % depoimentos.length],
+    depoimentos[(current + 2) % depoimentos.length],
+  ];
 
   return (
     <section id="depoimentos" className="py-16 bg-brand-black relative overflow-hidden">
@@ -98,65 +124,18 @@ export default function Depoimentos() {
         </motion.div>
 
         <div className="relative">
-          <AnimatePresence initial={false} custom={direction}>
+          <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: 'spring', stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-              }}
-              className="grid md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
-              {[0, 1, 2].map((offset) => {
-                const index = (current + offset) % depoimentos.length;
-                const depoimento = depoimentos[index];
-                return (
-                  <motion.div
-                    key={depoimento.id}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: offset * 0.1, duration: 0.6 }}
-                    className="glass-card rounded-3xl p-8 relative overflow-hidden"
-                  >
-                    <Quote className="w-10 h-10 text-brand-red/20 absolute -top-2 -right-2" />
-                    
-                    <div className="flex items-center gap-4 mb-6">
-                      <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-brand-red/30">
-                        <img
-                          src={depoimento.foto}
-                          alt={depoimento.nome}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h4 className="font-heading text-lg font-bold text-white">
-                          {depoimento.nome}
-                        </h4>
-                        <p className="text-brand-red text-sm font-medium">
-                          {depoimento.resultado}
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-gray-300 text-base leading-relaxed mb-6">
-                      "{depoimento.texto}"
-                    </p>
-
-                    {depoimento.videoUrl && (
-                      <div className="relative aspect-video rounded-xl overflow-hidden bg-gray-800">
-                        <button className="absolute inset-0 flex items-center justify-center bg-black/50 hover:bg-black/30 transition-colors">
-                          <Play className="w-12 h-12 text-white" />
-                        </button>
-                      </div>
-                    )}
-                  </motion.div>
-                );
-              })}
+              {visibleTestimonials.map((depoimento) => (
+                <TestimonialCard key={depoimento.id} depoimento={depoimento} />
+              ))}
             </motion.div>
           </AnimatePresence>
 
@@ -179,10 +158,7 @@ export default function Depoimentos() {
           {depoimentos.map((_, index) => (
             <button
               key={index}
-              onClick={() => {
-                setDirection(index > current ? 1 : index < current ? -1 : 0);
-                setCurrent(index);
-              }}
+              onClick={() => setCurrent(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === current ? 'bg-brand-red w-8' : 'bg-white/40 hover:bg-white/60'
               }`}

@@ -50,34 +50,63 @@ const posts = [
   },
 ];
 
+function PostCard({ post }) {
+  return (
+    <article className="bg-brand-dark/80 border border-white/10 rounded-3xl overflow-hidden card-glow group hover:transform hover:scale-[1.02] transition-all">
+      <div className="h-48 bg-gradient-to-br from-brand-red/20 to-brand-black/50 relative">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Tag className="w-16 h-16 text-brand-red/30" />
+        </div>
+      </div>
+      
+      <div className="p-6">
+        <div className="flex items-center gap-4 text-gray-400 text-sm mb-3">
+          <div className="flex items-center gap-1">
+            <Calendar className="w-4 h-4" />
+            <span>{new Date(post.data).toLocaleDateString('pt-BR')}</span>
+          </div>
+          <div className="flex items-center gap-1">
+            <User className="w-4 h-4" />
+            <span>{post.autor}</span>
+          </div>
+        </div>
+        
+        <span className="inline-block text-brand-red text-xs font-semibold uppercase tracking-wider mb-2">
+          {post.categoria}
+        </span>
+        
+        <h3 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
+          {post.titulo}
+        </h3>
+        
+        <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+          {post.resumo}
+        </p>
+        
+        <a href="#" className="inline-flex items-center gap-2 text-brand-red font-semibold text-sm hover:gap-3 transition-all">
+          Ler mais <ArrowRight className="w-4 h-4" />
+        </a>
+      </div>
+    </article>
+  );
+}
+
 export default function Blog() {
   const [current, setCurrent] = useState(0);
-  const [direction, setDirection] = useState(0);
 
   const prev = useCallback(() => {
-    setDirection(-1);
     setCurrent((prev) => (prev === 0 ? posts.length - 1 : prev - 1));
   }, []);
 
   const next = useCallback(() => {
-    setDirection(1);
     setCurrent((prev) => (prev === posts.length - 1 ? 0 : prev + 1));
   }, []);
 
-  const variants = {
-    enter: (direction) => ({
-      x: direction > 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction) => ({
-      x: direction < 0 ? 1000 : -1000,
-      opacity: 0,
-    }),
-  };
+  const visiblePosts = [
+    posts[current],
+    posts[(current + 1) % posts.length],
+    posts[(current + 2) % posts.length],
+  ];
 
   return (
     <section id="blog" className="py-24 bg-gradient-dark relative overflow-hidden">
@@ -103,68 +132,18 @@ export default function Blog() {
         </motion.div>
 
         <div className="relative">
-          <AnimatePresence initial={false} custom={direction}>
+          <AnimatePresence mode="wait">
             <motion.div
               key={current}
-              custom={direction}
-              variants={variants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: 'spring', stiffness: 300, damping: 30 },
-                opacity: { duration: 0.4 },
-              }}
-              className="grid md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
             >
-              {[0, 1, 2].map((offset) => {
-                const index = (current + offset) % posts.length;
-                const post = posts[index];
-                return (
-                  <motion.article
-                    key={post.id}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: offset * 0.1, duration: 0.6 }}
-                    className="bg-brand-dark/80 border border-white/10 rounded-3xl overflow-hidden card-glow group hover:transform hover:scale-[1.02] transition-all"
-                  >
-                    <div className="h-48 bg-gradient-to-br from-brand-red/20 to-brand-black/50 relative">
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <Tag className="w-16 h-16 text-brand-red/30" />
-                      </div>
-                    </div>
-                    
-                    <div className="p-6">
-                      <div className="flex items-center gap-4 text-gray-400 text-sm mb-3">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
-                          <span>{new Date(post.data).toLocaleDateString('pt-BR')}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <User className="w-4 h-4" />
-                          <span>{post.autor}</span>
-                        </div>
-                      </div>
-                      
-                      <span className="inline-block text-brand-red text-xs font-semibold uppercase tracking-wider mb-2">
-                        {post.categoria}
-                      </span>
-                      
-                      <h3 className="font-heading text-xl font-bold text-white mb-3 group-hover:text-gradient transition-all">
-                        {post.titulo}
-                      </h3>
-                      
-                      <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                        {post.resumo}
-                      </p>
-                      
-                      <a href="#" className="inline-flex items-center gap-2 text-brand-red font-semibold text-sm hover:gap-3 transition-all">
-                        Ler mais <ArrowRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </motion.article>
-                );
-              })}
+              {visiblePosts.map((post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
             </motion.div>
           </AnimatePresence>
 
@@ -187,10 +166,7 @@ export default function Blog() {
           {posts.map((_, index) => (
             <button
               key={index}
-              onClick={() => {
-                setDirection(index > current ? 1 : index < current ? -1 : 0);
-                setCurrent(index);
-              }}
+              onClick={() => setCurrent(index)}
               className={`w-2 h-2 rounded-full transition-all ${
                 index === current ? 'bg-brand-red w-8' : 'bg-white/40 hover:bg-white/60'
               }`}
