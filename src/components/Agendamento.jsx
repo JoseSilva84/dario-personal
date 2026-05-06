@@ -7,10 +7,10 @@ const horariosDisponiveis = [
 ];
 
 const tiposServico = [
-  { id: 1, nome: 'Avaliação Física', duracao: '60 min' },
+  { id: 1, nome: 'Anamnese', duracao: '60 min' },
   { id: 2, nome: 'Treino Personalizado', duracao: '50 min' },
   { id: 3, nome: 'Consultoria Online', duracao: '40 min' },
-  { id: 4, nome: 'Plano Alimentar', duracao: '30 min' },
+  { id: 4, nome: 'Mentoria Online', duracao: '30 min' },
 ];
 
 export default function Agendamento() {
