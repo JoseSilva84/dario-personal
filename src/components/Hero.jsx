@@ -99,6 +99,7 @@ export default function Hero() {
               backgroundPosition: slide.id === 1 ? 'center calc(30% + 100px)' : undefined
             }}
           >
+            {slide.id === 1 && <div className="absolute inset-0 hero-glow pointer-events-none" />}
             <div className="absolute inset-0 hero-gradient" />
             <div className="absolute inset-0 bg-gradient-to-r from-brand-black/95 via-brand-black/70 to-brand-black/10" />
           </div>
