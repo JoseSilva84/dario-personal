@@ -141,6 +141,19 @@ body {
   }
 }
 
+.social-link-active {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 0 10px rgba(217, 4, 41, 0.5));
+}
+
+.social-link-active.whatsapp-active {
+  filter: drop-shadow(0 0 10px rgba(37, 211, 102, 0.5));
+}
+
+.social-link-active.instagram-active {
+  filter: drop-shadow(0 0 10px rgba(228, 64, 95, 0.5));
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }

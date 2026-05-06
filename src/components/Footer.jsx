@@ -1,6 +1,10 @@
+import { useState } from 'react';
 import { Dumbbell, Heart } from 'lucide-react';
+import TouchLink from './TouchLink';
 
 export default function Footer() {
+  const [waToggled, setWaToggled] = useState(false);
+  const [igToggled, setIgToggled] = useState(false);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -54,26 +58,30 @@ export default function Footer() {
             </h4>
             <ul className="space-y-4 flex flex-col items-center md:items-start">
               <li>
-                <a
+                <TouchLink
                   href="https://wa.me/5588921657051"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 hover:text-[#25D366] transition-colors"
+                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 transition-all duration-300"
+                  activeClassName="text-[#25D366] social-link-active whatsapp-active"
+                  onStateChange={setWaToggled}
                 >
-                  <img src="/icons/whatsapp.svg" alt="WhatsApp" className="w-5 h-5" />
+                  <img src="/icons/whatsapp.svg" alt="WhatsApp" className={`w-5 h-5 transition-transform duration-300 ${waToggled ? 'scale-110' : ''}`} />
                   (88) 92165-7051
-                </a>
+                </TouchLink>
               </li>
               <li>
-                <a
+                <TouchLink
                   href="https://instagram.com/dariolopes_personal"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 hover:text-[#E4405F] transition-colors"
+                  className="flex items-center justify-center md:justify-start gap-3 text-gray-400 transition-all duration-300"
+                  activeClassName="text-[#E4405F] social-link-active instagram-active"
+                  onStateChange={setIgToggled}
                 >
-                  <img src="/icons/instagram.svg" alt="Instagram" className="w-5 h-5" />
+                  <img src="/icons/instagram.svg" alt="Instagram" className={`w-5 h-5 transition-transform duration-300 ${igToggled ? 'scale-110' : ''}`} />
                   @dariolopes_personal
-                </a>
+                </TouchLink>
               </li>
             </ul>
           </div>
