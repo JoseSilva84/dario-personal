@@ -93,6 +93,10 @@ function PostCard({ post }) {
 
 export default function Blog() {
   const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
 
   const prev = useCallback(() => {
     setCurrent((prev) => (prev === 0 ? posts.length - 1 : prev - 1));
@@ -102,6 +106,22 @@ export default function Blog() {
     setCurrent((prev) => (prev === posts.length - 1 ? 0 : prev + 1));
   }, []);
 
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) next();
+    if (isRightSwipe) prev();
+  };
+
   const visiblePosts = [
     posts[current],
     posts[(current + 1) % posts.length],
@@ -109,7 +129,13 @@ export default function Blog() {
   ];
 
   return (
-    <section id="blog" className="py-24 bg-gradient-dark relative overflow-hidden">
+    <section 
+      id="blog" 
+      className="py-24 bg-gradient-dark relative overflow-hidden"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-brand-red/5 rounded-full blur-3xl" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

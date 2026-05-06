@@ -40,6 +40,10 @@ const slides = [
 export default function Hero() {
   const [current, setCurrent] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
 
   const paginate = useCallback((newDirection) => {
     setDirection(newDirection);
@@ -50,6 +54,22 @@ export default function Hero() {
       return next;
     });
   }, []);
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) paginate(1);
+    if (isRightSwipe) paginate(-1);
+  };
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -77,7 +97,13 @@ export default function Hero() {
   };
 
   return (
-    <section id="inicio" className="relative h-screen overflow-hidden bg-brand-black">
+    <section 
+      id="inicio" 
+      className="relative h-screen overflow-hidden bg-brand-black"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={current}

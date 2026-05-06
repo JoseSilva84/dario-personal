@@ -85,6 +85,10 @@ function TestimonialCard({ depoimento }) {
 
 export default function Depoimentos() {
   const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
 
   const prev = useCallback(() => {
     setCurrent((prev) => (prev === 0 ? depoimentos.length - 1 : prev - 1));
@@ -94,6 +98,22 @@ export default function Depoimentos() {
     setCurrent((prev) => (prev === depoimentos.length - 1 ? 0 : prev + 1));
   }, []);
 
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe) next();
+    if (isRightSwipe) prev();
+  };
+
   const visibleTestimonials = [
     depoimentos[current],
     depoimentos[(current + 1) % depoimentos.length],
@@ -101,7 +121,13 @@ export default function Depoimentos() {
   ];
 
   return (
-    <section id="depoimentos" className="py-16 bg-brand-black relative overflow-hidden">
+    <section 
+      id="depoimentos" 
+      className="py-16 bg-brand-black relative overflow-hidden"
+      onTouchStart={onTouchStart}
+      onTouchMove={onTouchMove}
+      onTouchEnd={onTouchEnd}
+    >
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-brand-red/5 rounded-full blur-3xl -translate-y-1/2" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
