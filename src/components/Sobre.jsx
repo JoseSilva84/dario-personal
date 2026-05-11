@@ -2,9 +2,9 @@ import { motion } from 'framer-motion';
 import { Target, Award, Users, Heart } from 'lucide-react';
 
 const stats = [
-  { icon: Target, label: 'Alunos Transformados', value: '500+' },
-  { icon: Award, label: 'Anos de Experiência', value: '15+' },
-  { icon: Users, label: 'Avaliações Realizadas', value: '1000+' },
+  { icon: Target, label: 'Alunos Transformados', value: '100+' },
+  { icon: Award, label: 'Anos de Experiência', value: '3+' },
+  { icon: Users, label: 'Avaliações Realizadas', value: '100+' },
   { icon: Heart, label: 'Taxa de Satisfação', value: '98%' },
 ];
 
@@ -30,18 +30,16 @@ export default function Sobre() {
             </h2>
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
               <p>
-                Sou Dário Lopes, profissional de Educação Física dedicado a transformar
+                Sou Dário Lopes, Bacharel em Educação Física pela Universidade Estácio de Sá, com formação voltada para treinamento físico, saúde e qualidade de vida, dedicado a transformar
                 vidas através do treinamento personalizado e da consultoria online.
               </p>
               <p>
-                Com mais de 15 anos de experiência, desenvolvi metodologias exclusivas
-                que combinam ciência do exercício e nutrição esportiva para entregar
-                resultados reais e duradouros.
+                Minha trajetória acadêmica inclui estudos em fisiologia do exercício, biomecânica, treinamento neuromuscular, prescrição de exercícios e prevenção musculoesquelética, sempre com foco em resultados seguros e eficientes.
               </p>
               <p>
                 Minha missão é levar você ao seu máximo potencial, seja qual for seu
-                objetivo: emagrecimento, hipertrofia, condicionamento físico ou
-                preparação para competições.
+                objetivo: emagrecimento, hipertrofia, condicionamento físico,
+                preparação para competições ou melhoria da qualidade de vida.
               </p>
             </div>
 
@@ -51,7 +49,7 @@ export default function Sobre() {
               </div>
               <div>
                 <p className="text-white font-bold text-lg">Certificado e Especializado</p>
-                <p className="text-gray-400 text-sm">CREF ativo • Especialista em periodização</p>
+                <p className="text-gray-400 text-sm">CREF ativo • 022147-G /CE</p>
               </div>
             </div>
           </motion.div>
