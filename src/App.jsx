@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import Sobre from './components/Sobre'
 import Planos from './components/Planos'
 import Depoimentos from './components/Depoimentos'
+import Galeria from './components/Galeria'
 import Agendamento from './components/Agendamento'
 import Contato from './components/Contato'
 import Blog from './components/Blog'
@@ -27,6 +28,7 @@ function App() {
       <Sobre />
       <Planos />
       <Depoimentos />
+      <Galeria />
       <Agendamento />
       <Blog />
       <Contato />
