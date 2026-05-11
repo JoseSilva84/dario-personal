@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -46,11 +46,21 @@ const categorias = ['Todos', 'Treinos', 'Resultados', 'Acompanhamento'];
 export default function Galeria() {
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
   const [imagemAberta, setImagemAberta] = useState(null);
+  const scrollRef = useRef(null);
 
   const imagensFiltradas =
     categoriaAtiva === 'Todos'
       ? imagens
       : imagens.filter((img) => img.categoria === categoriaAtiva);
+
+  const scroll = (direction) => {
+    if (!scrollRef.current) return;
+    const scrollAmount = 340;
+    scrollRef.current.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    });
+  };
 
   const abrirImagem = (index) => setImagemAberta(index);
   const fecharImagem = () => setImagemAberta(null);
@@ -79,7 +89,7 @@ export default function Galeria() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
           <span className="text-brand-red font-semibold tracking-[0.3em] text-xs uppercase mb-4 block">
             Galeria
@@ -98,7 +108,7 @@ export default function Galeria() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center gap-3 mb-12"
+          className="flex flex-wrap justify-center gap-3 mb-8"
         >
           {categorias.map((cat) => (
             <button
@@ -115,48 +125,78 @@ export default function Galeria() {
           ))}
         </motion.div>
 
-        {/* Grid de imagens */}
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {imagensFiltradas.map((imagem, index) => (
-              <motion.div
-                key={imagem.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className="group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
-                onClick={() => abrirImagem(index)}
-              >
-                <img
-                  src={imagem.src}
-                  alt={imagem.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-5">
-                    <span className="text-brand-red text-xs font-semibold tracking-wider uppercase">
-                      {imagem.categoria}
-                    </span>
-                    <p className="text-white text-sm mt-1">{imagem.alt}</p>
+        {/* Carrossel com setas */}
+        <div className="relative">
+          {/* Seta esquerda */}
+          <button
+            onClick={() => scroll('left')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-brand-red/80 hover:border-brand-red transition-all cursor-pointer"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          {/* Seta direita */}
+          <button
+            onClick={() => scroll('right')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-6 z-10 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-brand-red/80 hover:border-brand-red transition-all cursor-pointer"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Carrossel */}
+          <div
+            ref={scrollRef}
+            className="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth px-2 py-4"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
+            <AnimatePresence mode="popLayout">
+              {imagensFiltradas.map((imagem, index) => (
+                <motion.div
+                  key={imagem.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className="flex-shrink-0 w-[280px] sm:w-[320px] group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
+                  onClick={() => abrirImagem(index)}
+                >
+                  <img
+                    src={imagem.src}
+                    alt={imagem.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-5">
+                      <span className="text-brand-red text-xs font-semibold tracking-wider uppercase">
+                        {imagem.categoria}
+                      </span>
+                      <p className="text-white text-sm mt-1">{imagem.alt}</p>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Dots indicadores */}
+        <div className="flex justify-center gap-2 mt-6">
+          {imagensFiltradas.map((_, index) => (
+            <div
+              key={index}
+              className="w-1.5 h-1.5 rounded-full bg-white/30"
+            />
+          ))}
+        </div>
 
         {/* Placeholder para Firebase */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-12 text-center"
+          className="mt-8 text-center"
         >
           <p className="text-gray-500 text-sm italic">
             Em breve: mais fotos carregadas diretamente do Firebase 🔥

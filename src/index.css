@@ -170,3 +170,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #c1121f;
 }
+
+/* Esconder scrollbar do carrossel da galeria */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
