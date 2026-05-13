@@ -122,7 +122,7 @@ body {
 }
 
 .hero-gradient {
-  background: linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.15) 0%, rgba(10, 10, 10, 0.7) 100%);
 }
 
 .hero-glow {

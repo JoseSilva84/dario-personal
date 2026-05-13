@@ -120,14 +120,20 @@ export default function Hero() {
         >
           <div
             className="absolute inset-0 bg-cover bg-center"
-            style={{ 
+            style={{
               backgroundImage: `url(${slide.image})`,
-              backgroundPosition: slide.id === 1 ? 'center calc(30% + 100px)' : undefined
+              backgroundPosition: slide.id === 1
+                ? 'center calc(30% + 100px)'
+                : slide.id === 2
+                  ? 'center calc(50% + 40px)'
+                  : slide.id === 3
+                    ? 'center calc(40% + 50px)'
+                    : 'center calc(35% + 50px)'
             }}
           >
             {slide.id === 1 && <div className="absolute inset-0 hero-glow pointer-events-none" />}
             <div className="absolute inset-0 hero-gradient" />
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-black/95 via-brand-black/70 to-brand-black/10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-black/85 via-brand-black/50 to-brand-black/5" />
           </div>
 
           <div className="relative h-full flex items-center">
