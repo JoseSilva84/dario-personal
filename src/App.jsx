@@ -9,6 +9,8 @@ import Contato from './components/Contato'
 import Blog from './components/Blog'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import AnimatedBackground from './components/AnimatedBackground'
+import CustomCursor from './components/CustomCursor'
 
 const NoiseOverlay = () => (
   <div 
@@ -21,19 +23,28 @@ const NoiseOverlay = () => (
 
 function App() {
   return (
-    <div className="min-h-screen bg-brand-black relative">
-      <NoiseOverlay />
-      <Navbar />
-      <Hero />
-      <Sobre />
-      <Planos />
-      <Depoimentos />
-      <Galeria />
-      <Agendamento />
-      <Blog />
-      <Contato />
-      <Footer />
-      <WhatsAppButton />
+    <div className="min-h-screen bg-brand-black relative cursor-none overflow-x-hidden">
+      {/* Background animado - posicionado absolutamente atrás de tudo */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <AnimatedBackground />
+      </div>
+      
+      {/* Conteúdo principal - z-index maior que o background */}
+      <div className="relative z-10">
+        <NoiseOverlay />
+        <CustomCursor />
+        <Navbar />
+        <Hero />
+        <Sobre />
+        <Planos />
+        <Depoimentos />
+        <Galeria />
+        <Agendamento />
+        <Blog />
+        <Contato />
+        <Footer />
+        <WhatsAppButton />
+      </div>
     </div>
   )
 }
