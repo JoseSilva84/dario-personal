@@ -156,7 +156,7 @@ export default function Hero() {
                 <div className="flex flex-wrap gap-4">
                   <a
                     href="#planos"
-                    className="btn-premium bg-gradient-red text-white px-8 py-4 rounded-full font-medium text-sm tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)] inline-flex items-center gap-2"
+                    className="btn-premium btn-swing bg-gradient-red text-white px-8 py-4 rounded-full font-medium text-sm tracking-widest uppercase hover:scale-105 transition-all duration-300 shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)] inline-flex items-center gap-2"
                   >
                     <Zap className="w-5 h-5" />
                     Conheça os Planos

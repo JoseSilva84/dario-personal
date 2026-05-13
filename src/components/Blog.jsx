@@ -208,7 +208,7 @@ export default function Blog() {
         >
           <a
             href="#"
-            className="inline-block bg-gradient-red text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity"
+            className="inline-block btn-swing bg-gradient-red text-white px-8 py-4 rounded-full font-bold text-lg hover:opacity-90 transition-opacity"
           >
             Ver Todos os Artigos
           </a>

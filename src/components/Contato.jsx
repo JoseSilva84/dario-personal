@@ -89,7 +89,7 @@ export default function Contato() {
                 href="https://wa.me/5588921657051"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block w-full bg-gradient-red text-white text-center py-5 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow"
+                className="block w-full btn-swing bg-gradient-red text-white text-center py-5 rounded-xl font-bold text-lg hover:opacity-90 transition-opacity animate-pulse-glow"
               >
                 CHAMAR NO WHATSAPP
               </a>

@@ -131,7 +131,7 @@ export default function Planos() {
                   rel="noopener noreferrer"
                   className={`w-full py-4 rounded-xl font-medium tracking-widest text-xs uppercase text-center flex items-center justify-center gap-2 transition-all duration-300 ${
                     plano.destaque
-                      ? 'btn-premium bg-gradient-red text-white shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)]'
+                      ? 'btn-premium btn-swing bg-gradient-red text-white shadow-[0_0_20px_rgba(217,4,41,0.3)] hover:shadow-[0_0_30px_rgba(217,4,41,0.5)]'
                       : 'glass-card text-white hover:bg-white/10'
                   }`}
                 >
