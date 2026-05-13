@@ -78,7 +78,7 @@ export default function Galeria() {
   };
 
   return (
-    <section id="galeria" className="py-16 bg-brand-black relative overflow-hidden">
+    <section id="galeria" className="py-16 relative overflow-hidden">
       {/* Background decorativo */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-brand-red/3 rounded-full blur-3xl" />

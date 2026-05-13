@@ -11,16 +11,8 @@ const AnimatedBackground = () => {
     let time = 0;
 
     const resizeCanvas = () => {
-      // Usar documentHeight para cobrir toda a página
-      const docHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.clientHeight,
-        document.documentElement.scrollHeight,
-        document.documentElement.offsetHeight
-      );
       canvas.width = window.innerWidth;
-      canvas.height = docHeight;
+      canvas.height = window.innerHeight;
     };
 
     const createParticle = (x, y) => ({
@@ -138,61 +130,25 @@ const AnimatedBackground = () => {
     initParticles();
     animate();
 
-    // Recalcular quando a janela redimensionar
     const handleResize = () => {
       resizeCanvas();
       initParticles();
     };
 
-    // Recalcular quando o conteúdo mudar (scroll ou mudança de conteúdo)
-    const handleScroll = () => {
-      const newHeight = Math.max(
-        document.body.scrollHeight,
-        document.body.offsetHeight,
-        document.documentElement.scrollHeight
-      );
-      if (newHeight !== canvas.height) {
-        resizeCanvas();
-        initParticles();
-      }
-    };
-
     window.addEventListener('resize', handleResize);
-    window.addEventListener('scroll', handleScroll);
-
-    // MutationObserver para detectar mudanças no DOM
-    const observer = new MutationObserver(() => {
-      const newHeight = Math.max(
-        document.body.scrollHeight,
-        document.documentElement.scrollHeight
-      );
-      if (newHeight !== canvas.height) {
-        resizeCanvas();
-        initParticles();
-      }
-    });
-    
-    observer.observe(document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true
-    });
 
     return () => {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('scroll', handleScroll);
-      observer.disconnect();
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="absolute top-0 left-0 w-full pointer-events-none"
+      className="fixed top-0 left-0 w-full h-full pointer-events-none"
       style={{ 
         zIndex: 0,
-        height: '100%',
       }}
     />
   );

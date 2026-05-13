@@ -78,7 +78,7 @@ body {
 }
 
 .bg-gradient-dark {
-  background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 10, 0.92) 0%, rgba(26, 26, 26, 0.92) 100%);
 }
 
 .bg-gradient-red {

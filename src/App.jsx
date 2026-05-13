@@ -24,10 +24,8 @@ const NoiseOverlay = () => (
 function App() {
   return (
     <div className="min-h-screen bg-brand-black relative cursor-none overflow-x-hidden">
-      {/* Background animado - posicionado absolutamente atrás de tudo */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <AnimatedBackground />
-      </div>
+      {/* Background animado - fixed para cobrir toda a viewport */}
+      <AnimatedBackground />
       
       {/* Conteúdo principal - z-index maior que o background */}
       <div className="relative z-10">

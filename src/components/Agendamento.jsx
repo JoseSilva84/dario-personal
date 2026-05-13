@@ -37,7 +37,7 @@ export default function Agendamento() {
   };
 
   return (
-    <section id="agendamento" className="py-24 bg-brand-black relative overflow-hidden">
+    <section id="agendamento" className="py-24 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-3xl" />
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">

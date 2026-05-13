@@ -123,7 +123,7 @@ export default function Depoimentos() {
   return (
     <section 
       id="depoimentos" 
-      className="py-16 bg-brand-black relative overflow-hidden"
+      className="py-16 relative overflow-hidden"
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
