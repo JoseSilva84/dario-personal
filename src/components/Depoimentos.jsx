@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -87,8 +87,14 @@ export default function Depoimentos() {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const pausedRef = useRef(false);
+  const intervalRef = useRef(null);
 
   const minSwipeDistance = 50;
+
+  const goTo = useCallback((index) => {
+    setCurrent(index);
+  }, []);
 
   const prev = useCallback(() => {
     setCurrent((prev) => (prev === 0 ? depoimentos.length - 1 : prev - 1));
@@ -105,7 +111,7 @@ export default function Depoimentos() {
 
   const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
 
-  const onTouchEnd = () => {
+  const onTouchEndHandler = () => {
     if (!touchStart || !touchEnd) return;
     const distance = touchStart - touchEnd;
     const isLeftSwipe = distance > minSwipeDistance;
@@ -114,6 +120,24 @@ export default function Depoimentos() {
     if (isRightSwipe) prev();
   };
 
+  // Autoplay usando ref para evitar recriar intervalo
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (!pausedRef.current) {
+        setCurrent((prev) => (prev === depoimentos.length - 1 ? 0 : prev + 1));
+      }
+    }, 4000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, []);
+
+  const handleMouseEnter = () => { pausedRef.current = true; };
+  const handleMouseLeave = () => { pausedRef.current = false; };
+
   const visibleTestimonials = [
     depoimentos[current],
     depoimentos[(current + 1) % depoimentos.length],
@@ -121,12 +145,14 @@ export default function Depoimentos() {
   ];
 
   return (
-    <section 
-      id="depoimentos" 
+    <section
+      id="depoimentos"
       className="py-16 relative overflow-hidden"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
-      onTouchEnd={onTouchEnd}
+      onTouchEnd={onTouchEndHandler}
     >
       <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-brand-red/5 rounded-full blur-3xl -translate-y-1/2" />
       
@@ -184,9 +210,9 @@ export default function Depoimentos() {
           {depoimentos.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrent(index)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                index === current ? 'bg-brand-red w-8' : 'bg-white/40 hover:bg-white/60'
+              onClick={() => goTo(index)}
+              className={`h-2 rounded-full transition-all cursor-pointer ${
+                index === current ? 'bg-brand-red w-8' : 'bg-white/40 w-2 hover:bg-white/60'
               }`}
             />
           ))}

@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -47,6 +47,8 @@ export default function Galeria() {
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
   const [imagemAberta, setImagemAberta] = useState(null);
   const scrollRef = useRef(null);
+  const pausedRef = useRef(false);
+  const intervalRef = useRef(null);
 
   const imagensFiltradas =
     categoriaAtiva === 'Todos'
@@ -77,8 +79,39 @@ export default function Galeria() {
     );
   };
 
+  // Autoplay - scroll automático usando ref
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      if (pausedRef.current || !scrollRef.current || imagemAberta !== null) return;
+
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const maxScroll = scrollWidth - clientWidth;
+      const scrollAmount = 340;
+
+      if (scrollLeft >= maxScroll - 10) {
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        scrollRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }, 3000);
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [imagemAberta]);
+
+  const handleMouseEnter = () => { pausedRef.current = true; };
+  const handleMouseLeave = () => { pausedRef.current = false; };
+
   return (
-    <section id="galeria" className="py-16 relative overflow-hidden">
+    <section
+      id="galeria"
+      className="py-16 relative"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Background decorativo */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-red/5 rounded-full blur-3xl" />
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-brand-red/3 rounded-full blur-3xl" />
