@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, User, ArrowRight, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -105,6 +105,13 @@ export default function Blog() {
   const next = useCallback(() => {
     setCurrent((prev) => (prev === posts.length - 1 ? 0 : prev + 1));
   }, []);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      next();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [next]);
 
   const onTouchStart = (e) => {
     setTouchEnd(null);
