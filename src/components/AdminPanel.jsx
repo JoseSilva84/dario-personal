@@ -28,6 +28,7 @@ export default function AdminPanel({ onClose }) {
   const [blogImg, setBlogImg] = useState(null);
   const [blogTitulo, setBlogTitulo] = useState('');
   const [blogResumo, setBlogResumo] = useState('');
+  const [blogConteudo, setBlogConteudo] = useState('');
   const [blogCategoria, setBlogCategoria] = useState('Treino');
   const [blogAutor, setBlogAutor] = useState('Dário Lopes');
 
@@ -184,6 +185,7 @@ export default function AdminPanel({ onClose }) {
         imagem: base64Image,
         titulo: blogTitulo,
         resumo: blogResumo,
+        conteudo: blogConteudo,
         categoria: blogCategoria,
         autor: blogAutor,
         data: new Date().toISOString(),
@@ -195,6 +197,7 @@ export default function AdminPanel({ onClose }) {
       setBlogImg(null);
       setBlogTitulo('');
       setBlogResumo('');
+      setBlogConteudo('');
       e.target.reset();
     } catch (error) {
       console.error('Erro ao adicionar post', error);
@@ -319,6 +322,10 @@ export default function AdminPanel({ onClose }) {
                     <div>
                       <label className="text-gray-400 text-sm block mb-1">Resumo</label>
                       <textarea value={blogResumo} onChange={e => setBlogResumo(e.target.value)} className="w-full bg-brand-dark border border-white/10 rounded-lg px-3 py-2 text-white focus:border-brand-red outline-none" rows="3" required></textarea>
+                    </div>
+                    <div>
+                      <label className="text-gray-400 text-sm block mb-1">Conteúdo</label>
+                      <textarea value={blogConteudo} onChange={e => setBlogConteudo(e.target.value)} className="w-full bg-brand-dark border border-white/10 rounded-lg px-3 py-2 text-white focus:border-brand-red outline-none" rows="6" placeholder="Escreva o conteúdo completo do post aqui..." required></textarea>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                       <div>

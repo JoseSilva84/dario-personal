@@ -41,8 +41,8 @@ function App() {
         <Planos />
         <Depoimentos />
         <Galeria />
-        <Agendamento />
         <Blog />
+        <Agendamento />
         <Contato />
         <Footer onOpenAdmin={() => setShowAdmin(true)} />
         <WhatsAppButton />
