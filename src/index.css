@@ -438,3 +438,27 @@ body {
     cursor: pointer !important;
   }
 }
+
+/* ============================
+   ADMIN PANEL OVERRIDES
+   ============================ */
+
+.admin-panel,
+.admin-panel * {
+  cursor: auto !important;
+}
+
+.admin-panel button,
+.admin-panel a,
+.admin-panel input[type="file"],
+.admin-panel input[type="submit"],
+.admin-panel select {
+  cursor: pointer !important;
+}
+
+.admin-panel input[type="text"],
+.admin-panel input[type="email"],
+.admin-panel input[type="password"],
+.admin-panel textarea {
+  cursor: text !important;
+}

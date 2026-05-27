@@ -1,6 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, User, ArrowRight, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, User, ArrowRight, Tag, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const posts = [
   {
@@ -95,23 +97,46 @@ export default function Blog() {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [postsState, setPostsState] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const q = query(collection(db, 'blog'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        if (data.length > 0) {
+          setPostsState(data);
+        } else {
+          setPostsState(posts);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar blog:", error);
+        setPostsState(posts);
+      }
+      setLoading(false);
+    };
+    fetchBlog();
+  }, []);
 
   const minSwipeDistance = 50;
 
   const prev = useCallback(() => {
-    setCurrent((prev) => (prev === 0 ? posts.length - 1 : prev - 1));
-  }, []);
+    setCurrent((prev) => (prev === 0 ? postsState.length - 1 : prev - 1));
+  }, [postsState.length]);
 
   const next = useCallback(() => {
-    setCurrent((prev) => (prev === posts.length - 1 ? 0 : prev + 1));
-  }, []);
+    setCurrent((prev) => (prev === postsState.length - 1 ? 0 : prev + 1));
+  }, [postsState.length]);
 
   useEffect(() => {
+    if (postsState.length === 0) return;
     const timer = setInterval(() => {
       next();
     }, 5000);
     return () => clearInterval(timer);
-  }, [next]);
+  }, [next, postsState.length]);
 
   const onTouchStart = (e) => {
     setTouchEnd(null);
@@ -129,11 +154,11 @@ export default function Blog() {
     if (isRightSwipe) prev();
   };
 
-  const visiblePosts = [
-    posts[current],
-    posts[(current + 1) % posts.length],
-    posts[(current + 2) % posts.length],
-  ];
+  const visiblePosts = postsState.length > 0 ? [
+    postsState[current],
+    postsState[(current + 1) % postsState.length],
+    postsState[(current + 2) % postsState.length],
+  ] : [];
 
   return (
     <section 
@@ -196,7 +221,7 @@ export default function Blog() {
         </div>
 
         <div className="flex justify-center gap-2 mt-8">
-          {posts.map((_, index) => (
+          {postsState.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrent(index)}

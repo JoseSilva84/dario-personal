@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Dumbbell, Heart } from 'lucide-react';
 import TouchLink from './TouchLink';
 
-export default function Footer() {
+export default function Footer({ onOpenAdmin }) {
   const [waToggled, setWaToggled] = useState(false);
   const [igToggled, setIgToggled] = useState(false);
   const currentYear = new Date().getFullYear();
@@ -89,7 +89,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-gray-500 text-sm">
-            © {currentYear} Dário Lopes Personal. Todos os direitos reservados.
+            <span onClick={onOpenAdmin} className="cursor-pointer hover:text-white transition-colors" title="Área Restrita">©</span> {currentYear} Dário Lopes Personal. Todos os direitos reservados.
           </p>
           <p className="text-gray-500 text-sm flex items-center gap-1">
             Feito com <Heart className="w-4 h-4 text-brand-red fill-brand-red" />{' '}

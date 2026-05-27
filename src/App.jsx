@@ -11,6 +11,8 @@ import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import AnimatedBackground from './components/AnimatedBackground'
 import CustomCursor from './components/CustomCursor'
+import AdminPanel from './components/AdminPanel'
+import { useState } from 'react'
 
 const NoiseOverlay = () => (
   <div 
@@ -22,6 +24,8 @@ const NoiseOverlay = () => (
 );
 
 function App() {
+  const [showAdmin, setShowAdmin] = useState(false);
+
   return (
     <div className="min-h-screen bg-brand-black relative cursor-none overflow-x-hidden">
       {/* Background animado - fixed para cobrir toda a viewport */}
@@ -40,9 +44,11 @@ function App() {
         <Agendamento />
         <Blog />
         <Contato />
-        <Footer />
+        <Footer onOpenAdmin={() => setShowAdmin(true)} />
         <WhatsAppButton />
       </div>
+
+      {showAdmin && <AdminPanel onClose={() => setShowAdmin(false)} />}
     </div>
   )
 }

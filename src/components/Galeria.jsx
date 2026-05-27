@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Loader2 } from 'lucide-react';
+import { collection, query, orderBy, getDocs } from 'firebase/firestore';
+import { db } from '../firebase';
 
 const imagens = [
   {
@@ -46,14 +48,36 @@ const categorias = ['Todos', 'Treinos', 'Resultados', 'Acompanhamento'];
 export default function Galeria() {
   const [categoriaAtiva, setCategoriaAtiva] = useState('Todos');
   const [imagemAberta, setImagemAberta] = useState(null);
+  const [imagensState, setImagensState] = useState([]);
+  const [loading, setLoading] = useState(true);
   const scrollRef = useRef(null);
   const pausedRef = useRef(false);
   const intervalRef = useRef(null);
 
+  useEffect(() => {
+    const fetchGaleria = async () => {
+      try {
+        const q = query(collection(db, 'galeria'), orderBy('createdAt', 'desc'));
+        const querySnapshot = await getDocs(q);
+        const data = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        if (data.length > 0) {
+          setImagensState(data);
+        } else {
+          setImagensState(imagens);
+        }
+      } catch (error) {
+        console.error("Erro ao carregar galeria:", error);
+        setImagensState(imagens);
+      }
+      setLoading(false);
+    };
+    fetchGaleria();
+  }, []);
+
   const imagensFiltradas =
     categoriaAtiva === 'Todos'
-      ? imagens
-      : imagens.filter((img) => img.categoria === categoriaAtiva);
+      ? imagensState
+      : imagensState.filter((img) => img.categoria === categoriaAtiva);
 
   const scroll = (direction) => {
     if (!scrollRef.current) return;
@@ -223,18 +247,6 @@ export default function Galeria() {
             />
           ))}
         </div>
-
-        {/* Placeholder para Firebase */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-8 text-center"
-        >
-          <p className="text-gray-500 text-sm italic">
-            Em breve: mais fotos carregadas diretamente do Firebase 🔥
-          </p>
-        </motion.div>
       </div>
 
       {/* Lightbox */}
