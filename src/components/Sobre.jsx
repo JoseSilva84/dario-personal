@@ -59,8 +59,7 @@ export default function Sobre() {
             </h2>
             <div className="space-y-4 text-gray-300 text-lg leading-relaxed">
               <p>
-                Sou Dário Lopes, Bacharel em Educação Física pela Universidade Estácio de Sá, com formação voltada para treinamento físico, saúde e qualidade de vida, dedicado a transformar
-                vidas através do treinamento personalizado e da consultoria online.
+                Sou Dário Lopes, personal trainer em Juazeiro do Norte, Ceará, Bacharel em Educação Física pela Universidade Estácio de Sá, com formação voltada para treinamento físico, saúde e qualidade de vida. Atendo com consultoria presencial em academia e acompanhamento online.
               </p>
               <p>
                 Minha trajetória acadêmica inclui estudos em fisiologia do exercício, biomecânica, treinamento neuromuscular, prescrição de exercícios e prevenção musculoesquelética, sempre com foco em resultados seguros e eficientes.
@@ -68,7 +67,7 @@ export default function Sobre() {
               <p>
                 Minha missão é levar você ao seu máximo potencial, seja qual for seu
                 objetivo: emagrecimento, hipertrofia, condicionamento físico,
-                preparação para competições ou melhoria da qualidade de vida.
+                preparação para competições ou melhoria da qualidade de vida, com treinos ajustados à sua rotina.
               </p>
             </div>
 
@@ -95,7 +94,7 @@ export default function Sobre() {
                 <motion.img
                   key={currentImage}
                   src={images[currentImage]}
-                  alt={`Foto ${currentImage + 1}`}
+                  alt={`Dário Lopes personal trainer em Juazeiro do Norte - foto ${currentImage + 1}`}
                   initial={{ opacity: 0, scale: 1.1 }}
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.95 }}

@@ -8,7 +8,7 @@ const imagens = [
   {
     id: 1,
     src: '/images/galeria1.jpg',
-    alt: 'Treino personalizado',
+    alt: 'Treino personalizado com personal trainer em Juazeiro do Norte',
     categoria: 'Treinos',
   },
   {
@@ -20,7 +20,7 @@ const imagens = [
   {
     id: 3,
     src: '/images/galeria3.jpg',
-    alt: 'Acompanhamento online',
+    alt: 'Acompanhamento online de personal trainer',
     categoria: 'Acompanhamento',
   },
   {
@@ -38,7 +38,7 @@ const imagens = [
   {
     id: 6,
     src: '/images/galeria6.jpg',
-    alt: 'Consultoria fitness',
+    alt: 'Consultoria fitness online e presencial',
     categoria: 'Acompanhamento',
   },
 ];
@@ -206,47 +206,53 @@ export default function Galeria() {
             className="flex gap-5 overflow-x-auto scrollbar-hide scroll-smooth px-2 py-4"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <AnimatePresence mode="popLayout">
-              {imagensFiltradas.map((imagem, index) => (
-                <motion.div
-                  key={imagem.id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="flex-shrink-0 w-[280px] sm:w-[320px] group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
-                  onClick={() => abrirImagem(index)}
-                >
-                  <img
-                    src={imagem.src}
-                    alt={imagem.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="absolute bottom-0 left-0 right-0 p-5">
-                      <span className="text-brand-red text-xs font-semibold tracking-wider uppercase">
-                        {imagem.categoria}
-                      </span>
-                      <p className="text-white text-sm mt-1">{imagem.alt}</p>
+            {loading ? (
+              <div className="flex min-h-[240px] w-full items-center justify-center">
+                <Loader2 className="w-10 h-10 text-brand-red animate-spin" />
+              </div>
+            ) : (
+              <AnimatePresence mode="popLayout">
+                {imagensFiltradas.map((imagem, index) => (
+                  <motion.div
+                    key={imagem.id}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                    className="flex-shrink-0 w-[280px] sm:w-[320px] group relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer"
+                    onClick={() => abrirImagem(index)}
+                  >
+                    <img
+                      src={imagem.src}
+                      alt={imagem.alt}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="absolute bottom-0 left-0 right-0 p-5">
+                        <span className="text-brand-red text-xs font-semibold tracking-wider uppercase">
+                          {imagem.categoria}
+                        </span>
+                        <p className="text-white text-sm mt-1">{imagem.alt}</p>
+                      </div>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+            )}
           </div>
         </div>
 
         {/* Dots indicadores */}
-        <div className="flex justify-center gap-2 mt-6">
+        {!loading && <div className="flex justify-center gap-2 mt-6">
           {imagensFiltradas.map((_, index) => (
             <div
               key={index}
               className="w-1.5 h-1.5 rounded-full bg-white/30"
             />
           ))}
-        </div>
+        </div>}
       </div>
 
       {/* Lightbox */}

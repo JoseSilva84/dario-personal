@@ -72,7 +72,7 @@ export default function Planos() {
             <span className="text-gradient font-medium">PLANOS</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Planos flexíveis para todos os níveis. Comece sua transformação hoje mesmo.
+            Planos flexíveis para treino presencial em Juazeiro do Norte e consultoria online em qualquer lugar.
           </p>
         </motion.div>
 

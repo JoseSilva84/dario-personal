@@ -24,8 +24,8 @@ export default function Footer({ onOpenAdmin }) {
               </div>
             </div>
             <p className="text-gray-400 leading-relaxed">
-              Profissional de Educação Física dedicado a transformar vidas
-              através do treinamento personalizado e resultados de elite.
+              Personal trainer em Juazeiro do Norte, CE, com consultoria presencial
+              em academia, acompanhamento online e treinos personalizados.
             </p>
           </div>
 

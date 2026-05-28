@@ -24,8 +24,8 @@ export default function Contato() {
             </h2>
             <p className="text-gray-300 text-lg mb-8 leading-relaxed">
               Não espere mais para alcançar seus objetivos. Entre em contato agora
-              e descubra como posso te ajudar a conquistar o corpo e a saúde que você
-              sempre desejou.
+              e descubra como posso te ajudar com personal trainer presencial em
+              Juazeiro do Norte ou consultoria online para qualquer cidade.
             </p>
 
             <div className="space-y-4">
@@ -45,7 +45,7 @@ export default function Contato() {
                 </div>
                 <div>
                   <p className="text-gray-400 text-sm">Atendimento</p>
-                  <p className="text-white font-semibold">Seg - Sex: 8h às 17h</p>
+                  <p className="text-white font-semibold">Seg - Sex: 8h às 17h | Juazeiro do Norte e online</p>
                 </div>
               </div>
             </div>

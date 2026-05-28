@@ -5,9 +5,9 @@ import { ChevronLeft, ChevronRight, Flame, Zap, Trophy } from 'lucide-react';
 const slides = [
   {
     id: 1,
-    title: 'CONSULTORIA ONLINE',
-    subtitle: 'COMECE SUA MUDANÇA HOJE!',
-    description: 'Profissional de educação física para resultados de elite.',
+    title: 'PERSONAL TRAINER',
+    subtitle: 'EM JUAZEIRO DO NORTE',
+    description: 'Treino presencial em academia e consultoria online com acompanhamento personalizado.',
     image: '/images/dario1.png',
     icon: Flame,
   },
@@ -147,7 +147,7 @@ export default function Hero() {
                 <div className="flex items-center gap-2 mb-4">
                   <Icon className="w-5 h-5 text-brand-red" />
                   <span className="text-brand-red font-semibold tracking-[0.3em] text-xs uppercase">
-                    Dário Lopes Personal
+                    Dário Lopes Personal Trainer
                   </span>
                 </div>
                 <h1 className="font-heading text-5xl sm:text-6xl lg:text-7xl font-medium tracking-wide uppercase text-white mb-4 leading-tight">
@@ -173,7 +173,7 @@ export default function Hero() {
                     rel="noopener noreferrer"
                     className="glass-card text-white px-8 py-4 rounded-full font-medium text-sm tracking-widest uppercase hover:bg-white/10 hover:scale-105 transition-all duration-300 inline-flex items-center gap-2"
                   >
-                    Fale Comigo
+                    Consultoria Online e Presencial
                   </a>
                 </div>
               </motion.div>
